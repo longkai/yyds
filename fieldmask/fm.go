@@ -10,6 +10,8 @@ import (
 
 // Mask filters the msg to contain only those fields specified in the paths.
 //
+// Empty paths will mask nothing.
+//
 // For more information please go to https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask
 func Mask(msg proto.Message, paths ...string) error {
 	fm, err := fieldmaskpb.New(msg, paths...)
