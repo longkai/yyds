@@ -10,12 +10,13 @@ import (
 
 // Mask filters the msg to contain only those fields specified in the paths.
 //
-// For more information please go to https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-func Mask(paths []string, msg proto.Message) error {
+// For more information please go to https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask
+func Mask(msg proto.Message, paths ...string) error {
 	fm, err := fieldmaskpb.New(msg, paths...)
 	if err != nil {
 		return err
 	}
+	fm.Normalize()
 	newMasker(fm.Paths).mask(msg)
 	return nil
 }
